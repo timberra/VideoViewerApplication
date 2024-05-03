@@ -17,12 +17,10 @@ class VideoStore: ObservableObject {
     init() {
         fetchVideos()
     }
-
     func fetchVideos() {
         guard let url = URL(string: "https://iphonephotographyschool.com/test-api/lessons") else {
             return
         }
-        
         URLSession.shared.dataTaskPublisher(for: url)
             .map(\.data)
             .decode(type: [String: [Video]].self, decoder: JSONDecoder())
